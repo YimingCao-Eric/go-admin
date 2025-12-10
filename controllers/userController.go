@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"golangProject/database"
-	"golangProject/middlewares"
-	"golangProject/models"
+	"go-admin/database"
+	"go-admin/middlewares"
+	"go-admin/models"
 	"strconv"
 
 	"github.com/gofiber/fiber/v3"

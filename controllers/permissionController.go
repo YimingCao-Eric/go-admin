@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"golangProject/database"
-	"golangProject/models"
+	"go-admin/database"
+	"go-admin/models"
 
 	"github.com/gofiber/fiber/v3"
 )

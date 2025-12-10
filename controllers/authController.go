@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"golangProject/database"
-	"golangProject/models"
-	"golangProject/util"
+	"go-admin/database"
+	"go-admin/models"
+	"go-admin/util"
 	"strconv"
 	"time"
 

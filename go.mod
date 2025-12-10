@@ -1,4 +1,4 @@
-module golangProject
+module go-admin
 
 go 1.25.0
 

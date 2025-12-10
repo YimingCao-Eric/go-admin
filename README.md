@@ -57,7 +57,7 @@ Before running this project, ensure you have the following installed:
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd golangProject
+   cd go-admin
    ```
 
 2. **Install dependencies**
@@ -110,7 +110,7 @@ Before running this project, ensure you have the following installed:
 ## 📁 Project Structure
 
 ```
-golangProject/
+go-admin/
 ├── controllers/          # Request handlers
 │   ├── authController.go      # Authentication endpoints
 │   ├── userController.go      # User management

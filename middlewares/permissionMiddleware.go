@@ -2,9 +2,9 @@ package middlewares
 
 import (
 	"errors"
-	"golangProject/database"
-	"golangProject/models"
-	"golangProject/util"
+	"go-admin/database"
+	"go-admin/models"
+	"go-admin/util"
 	"strconv"
 
 	"github.com/gofiber/fiber/v3"

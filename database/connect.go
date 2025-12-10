@@ -1,7 +1,7 @@
 package database
 
 import (
-	"golangProject/models"
+	"go-admin/models"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

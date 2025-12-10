@@ -1,8 +1,8 @@
 package main
 
 import (
-	"golangProject/database"
-	"golangProject/routes"
+	"go-admin/database"
+	"go-admin/routes"
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/cors"

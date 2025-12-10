@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"encoding/csv"
-	"golangProject/database"
-	"golangProject/models"
+	"go-admin/database"
+	"go-admin/models"
 	"os"
 	"strconv"
 

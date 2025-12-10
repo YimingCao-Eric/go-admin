@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"golangProject/controllers"
-	"golangProject/middlewares"
+	"go-admin/controllers"
+	"go-admin/middlewares"
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/static"
