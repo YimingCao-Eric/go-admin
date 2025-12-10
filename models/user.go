@@ -5,18 +5,21 @@ import (
 	"gorm.io/gorm"
 )
 
+// User represents a user account in the system
+// Maintains authentication credentials and role-based access control
 type User struct {
-	Id        uint   `json:"id"` // Primary key ID
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Email     string `json:"email" gorm:"unique"` // Email with unique constraint
-	Password  []byte `json:"-"`                   // Hashed password stored as bytes, excluded from JSON responses for security
-	RoleId    uint   `json:"role_id"`
-	Role      Role   `json:"role" gorm:"foreignKey:RoleId"`
+	Id        uint   `json:"id"`         // Primary key
+	FirstName string `json:"first_name"` // User's first name
+	LastName  string `json:"last_name"`  // User's last name
+	Email     string `json:"email" gorm:"unique"` // Email address (unique constraint)
+	Password  []byte `json:"-"`          // Hashed password (excluded from JSON for security)
+	RoleId    uint   `json:"role_id"`    // Foreign key to Role
+	Role      Role   `json:"role" gorm:"foreignKey:RoleId"` // Associated role
 }
 
 // Count implements the Entity interface for User
 // Returns the total number of user records in the database
+// Used by the Paginate function for pagination metadata
 func (user *User) Count(db *gorm.DB) int64 {
 	var total int64
 	db.Model(&User{}).Count(&total)
@@ -24,40 +27,37 @@ func (user *User) Count(db *gorm.DB) int64 {
 }
 
 // Take implements the Entity interface for User
-// Retrieves a paginated subset of users with their roles preloaded
+// Retrieves a paginated subset of users with their roles and permissions preloaded
+// Eagerly loads Role.Permissions to avoid N+1 query problem
 func (user *User) Take(db *gorm.DB, limit int, offset int) interface{} {
 	var users []User
 	db.Preload("Role.Permissions").Offset(offset).Limit(limit).Find(&users)
 	return users
 }
 
-// SetPassword hashes a plain text password and assigns it to the user
-// This encapsulates the password hashing logic within the User model
-// Parameters:
-//   - password: plain text password to be hashed and stored
+// SetPassword hashes a plain text password using bcrypt and stores it
+// Encapsulates password hashing logic within the User model
+// Uses bcrypt cost factor 14 for strong security (higher = more secure but slower)
+// Automatically generates and stores a unique salt for each password
 //
-// Security Note: Uses bcrypt with cost factor 14 for strong security
+// Parameters:
+//   - password: plain text password to be hashed
 func (user *User) SetPassword(password string) {
-	// Generate a hashed password from the plain text password
-	// Cost factor 14 provides strong security (higher = more secure but slower)
-	// bcrypt automatically handles salt generation and storage
+	// Generate bcrypt hash with cost factor 14
 	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(password), 14)
-
-	// Assign the hashed password to the user's Password field
 	user.Password = hashedPassword
 }
 
 // ComparePassword verifies if a provided plain text password matches the stored hash
-// This method handles the secure comparison using bcrypt's constant-time comparison
+// Uses bcrypt's constant-time comparison to prevent timing attacks
+// Returns nil if passwords match, error otherwise
+//
 // Parameters:
 //   - password: plain text password to verify
 //
 // Returns:
-//   - error: nil if passwords match, error if they don't match or comparison fails
-//
-// Security: Uses bcrypt.CompareHashAndPassword for secure, timing-attack resistant comparison
+//   - error: nil if passwords match, error if mismatch or comparison fails
 func (user *User) ComparePassword(password string) error {
-	// Compare the provided password with the stored hash
-	// This method handles the cryptographic comparison securely
+	// Compare provided password with stored hash using bcrypt
 	return bcrypt.CompareHashAndPassword(user.Password, []byte(password))
 }

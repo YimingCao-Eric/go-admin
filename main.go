@@ -9,25 +9,25 @@ import (
 )
 
 func main() {
-	// Connect to the database
+	// Establish database connection
 	database.Connect()
 
-	// Initialize a new Fiber app
+	// Create a new Fiber application instance
 	app := fiber.New()
 
-	// Configure and use CORS middleware
+	// Configure Cross-Origin Resource Sharing (CORS) middleware
 	app.Use(cors.New(cors.Config{
-		// Custom function to check allowed origins
+		// Currently allows requests from localhost:3000 (typical frontend dev server)
 		AllowOriginsFunc: func(origin string) bool {
-
 			return origin == "http://localhost:3000"
 		},
-		AllowCredentials: true, // Allow cookies and credentials to be sent
+		// AllowCredentials enables cookies and authorization headers in CORS requests
+		AllowCredentials: true,
 	}))
 
-	// Set up application routes
+	// This sets up all API endpoints(routes) and their corresponding handlers
 	routes.Setup(app)
 
-	// Start the server on port 3000
+	// Start the HTTP server and listen on port 8000
 	app.Listen(":8000")
 }
