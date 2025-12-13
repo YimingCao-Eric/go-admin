@@ -50,7 +50,7 @@ Before running this project, ensure you have the following installed:
 
 - **Go** (version 1.25.0 or higher)
 - **MySQL** (version 5.7 or higher)
-- **Git**
+- **Git** (for cloning the repository)
 
 ## 🔧 Installation
 
@@ -106,6 +106,10 @@ Before running this project, ensure you have the following installed:
    ```
    http://localhost:8000/api/*
    ```
+
+4. **Start the frontend** (optional)
+   
+   To use the full admin dashboard, start the React frontend. See the [react-admin repository](https://github.com/YimingCao-Eric/react-admin) for frontend setup instructions.
 
 ## 📁 Project Structure
 
@@ -214,13 +218,16 @@ The API uses JWT (JSON Web Tokens) for authentication:
 1. **Login**: Send credentials to `/api/login`
    - On success, receives JWT token in HTTP-only cookie named `jwt`
    - Token expires after 24 hours
+   - Token contains user ID in the issuer claim
 
 2. **Authenticated Requests**: Include JWT token in cookie
    - Middleware validates token automatically
    - Invalid/expired tokens return 401 Unauthorized
+   - All routes after `/api/register` and `/api/login` require authentication
 
 3. **Logout**: Send POST request to `/api/logout`
    - Clears authentication cookie
+   - Returns success message
 
 ## 🛡️ Authorization (RBAC)
 
@@ -282,10 +289,12 @@ The application automatically migrates schema on startup. Tables are created/upd
 ## 🔄 Frontend Integration
 
 This backend is designed to work with the React admin frontend:
-- **Frontend URL**: `http://localhost:3000`
-- **Backend URL**: `http://localhost:8000`
+- **Frontend URL**: `http://localhost:3000` (development)
+- **Backend URL**: `http://localhost:8000` (development)
 - **CORS**: Configured to allow requests from frontend origin
-- **Cookies**: Credentials enabled for JWT token transmission
+- **Cookies**: Credentials enabled for JWT token transmission (HTTP-only, 24-hour expiration)
+- **API Base Path**: All endpoints prefixed with `/api/`
+- **Frontend Repository**: See [react-admin](https://github.com/YimingCao-Eric/react-admin) for frontend setup
 
 ## 📦 Dependencies
 
@@ -295,11 +304,56 @@ This backend is designed to work with the React admin frontend:
 - **JWT-Go**: JWT token handling
 - **bcrypt**: Password hashing
 
+## 🚀 Deployment
+
+### Production Considerations
+
+1. **Environment Variables**
+   - Move database credentials to environment variables
+   - Use secure JWT secret from environment
+   - Configure CORS origins for production domain
+
+2. **Database**
+   - Use production-grade MySQL instance
+   - Configure connection pooling
+   - Set up database backups
+
+3. **Security**
+   - Use HTTPS in production
+   - Configure secure cookie settings
+   - Implement rate limiting
+   - Set up proper logging and monitoring
+
+4. **Build and Run**
+   ```bash
+   # Build the application
+   go build -o admin-server main.go
+   
+   # Run the binary
+   ./admin-server
+   ```
+
 ## 📝 License
 
 This project is part of an e-commerce admin system.
 
+## 🤝 Contributing
+
+This project follows best practices for Go development. When contributing:
+
+1. Follow the existing code style and comment conventions
+2. Ensure proper error handling
+3. Test your changes thoroughly
+4. Update documentation as needed
+
+## 📚 Learn More
+
+- [Go Documentation](https://go.dev/doc/)
+- [Fiber Documentation](https://docs.gofiber.io/)
+- [GORM Documentation](https://gorm.io/docs/)
+- [JWT Documentation](https://jwt.io/)
+
 ---
 
-**Note**: This is the backend service. For the frontend React admin dashboard, visit [react-admin repository](https://github.com/YimingCao-Eric/react-admin).
+**Note**: This is the backend service. For the frontend React admin dashboard, visit the [react-admin repository](https://github.com/YimingCao-Eric/react-admin).
 
