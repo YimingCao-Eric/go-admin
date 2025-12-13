@@ -347,13 +347,6 @@ This project follows best practices for Go development. When contributing:
 3. Test your changes thoroughly
 4. Update documentation as needed
 
-## 📚 Learn More
-
-- [Go Documentation](https://go.dev/doc/)
-- [Fiber Documentation](https://docs.gofiber.io/)
-- [GORM Documentation](https://gorm.io/docs/)
-- [JWT Documentation](https://jwt.io/)
-
 ---
 
 **Note**: This is the backend service. For the frontend React admin dashboard, visit the [react-admin repository](https://github.com/YimingCao-Eric/react-admin).
