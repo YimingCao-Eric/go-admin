@@ -1,6 +1,6 @@
 # E-Commerce Admin Backend API
 
-A robust Go-based RESTful API backend service built with Fiber framework for managing an e-commerce admin dashboard. This backend provides comprehensive functionality including user authentication, role-based access control (RBAC), product management, order processing, and analytics. The codebase follows (and extends) lessons from the course [React and Golang: A Practical Guide](https://www.udemy.com/course/react-go-admin/). 
+A robust Go-based RESTful API backend service built with Fiber framework for managing an e-commerce admin dashboard. This backend provides comprehensive functionality including user authentication, role-based access control (RBAC), product management, order processing, and analytics. The codebase follows (and extends) lessons from the course [React and Golang: A Practical Guide](https://www.udemy.com/course/react-go-admin/).
 
 **Frontend Repository:** [react-admin](https://github.com/YimingCao-Eric/react-admin)
 
@@ -79,7 +79,7 @@ Before running this project, ensure you have the following installed:
    // Currently configured for: root:fb112358@/go_admin
    // In production, use environment variables instead
    ```
-
+   
    **⚠️ Important:** For production, move database credentials to environment variables.
 
 5. **Configure JWT Secret**
@@ -289,6 +289,7 @@ The application automatically migrates schema on startup. Tables are created/upd
 ## 🔄 Frontend Integration
 
 This backend is designed to work with the React admin frontend:
+
 - **Frontend URL**: `http://localhost:3000` (development)
 - **Backend URL**: `http://localhost:8000` (development)
 - **CORS**: Configured to allow requests from frontend origin
@@ -356,4 +357,3 @@ This project follows best practices for Go development. When contributing:
 ---
 
 **Note**: This is the backend service. For the frontend React admin dashboard, visit the [react-admin repository](https://github.com/YimingCao-Eric/react-admin).
-
