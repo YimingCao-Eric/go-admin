@@ -1,4 +1,4 @@
-# E-Commerce Admin Backend API
+# E-Commerce Admin Backend API (Golang)
 
 A robust Go-based RESTful API backend service built with Fiber framework for managing an e-commerce admin dashboard. This backend provides comprehensive functionality including user authentication, role-based access control (RBAC), product management, order processing, and analytics. The codebase follows (and extends) lessons from the course [React and Golang: A Practical Guide](https://www.udemy.com/course/react-go-admin/).
 
